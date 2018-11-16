@@ -28,7 +28,7 @@ To run the app, do the following:
 1. On  the Terminal, navigate to the directory path `/daw_project/server`.
 1. Type `python app.py`.
 1. While the app is running on Terminal, open a web browser.
-1. Launch the link `http://127.0.0.1:8090`.
+1. Launch `http://127.0.0.1:8090` on the web browser URL.
 
 ## Running the tests
 
