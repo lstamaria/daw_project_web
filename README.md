@@ -2,7 +2,7 @@
 
 This project aims to introduce some fundamental steps on how to build machine learning model using logistic regression. It is inspired by another project presented in Machine Learning course that uses classification algorithms to make prediction. 
 
-The app is made entirely using Dash.
+The web app is created using Flask Python, Plotly Javascript, and Bootstrap CSS.
 
 ## Getting Started
 
