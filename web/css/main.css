@@ -1,0 +1,50 @@
+p {
+	/*font-size: .8em;*/
+}
+
+h2 {
+	/*font-size: 1.5em;*/
+}
+
+h3 {
+	/*font-size: 1.2em;*/
+}
+
+.loc {
+    /*text-align: center;*/
+	/*width: 90px;*/
+    height: 50px;
+    margin: auto;    
+    display: block;
+}
+
+.loc2 {
+    /*text-align: center;*/
+	/*width: 90px;*/
+    height: 40px;
+    margin: auto;    
+    display: block;
+}
+
+.loc3 {
+    /*text-align: center;*/
+	/*width: 90px;*/
+    height: 150px;
+    margin: auto;    
+    display: block;
+}
+
+
+label {
+	/*font-size: .8em;*/
+}
+
+ul {
+  list-style-type: none;
+}
+
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}

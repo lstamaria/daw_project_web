@@ -1,0 +1,17 @@
+name: data_app
+channels:
+  - default
+  - conda-forge
+dependencies:
+  - python
+  - dash
+  - ipykernel>=0.49
+  - flask
+  - pandas
+  - numpy
+  - autopep8
+  - scikit-learn
+  - pip:
+    - dash_core_components
+    - dash_html_components
+    - dash_table_experiments

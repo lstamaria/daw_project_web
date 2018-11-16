@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <!-- Additional styles -->
+  <link rel="shortcut icon" type="image/png" href="web/img/favicon.ico">
+  <link rel="stylesheet" href="web/css/bootstrap.css">
+  <link rel="stylesheet" href="web/css/main.css">
+
+  <title>McDonald's Meal Prediction</title>
+
+</head>
+<body>
+  <nav class="navbar sticky-top navbar-expand-md navbar-dark bg-dark ">
+    <h1 class="mb-0"><a class="nav-link text-warning" href="https://www.mcdonalds.com.ph/">McDonald's</a></h1>
+    <!-- Navbar content -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Nav tabs -->
+    <div class="collapse navbar-collapse" id="navbarToggler">
+      <ul class="nav" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active text-light" id="about-tab" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" id="eda-tab" data-toggle="tab" href="#eda" role="tab" aria-controls="eda" aria-selected="false">Explore dataset</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" id="pcc-tab" data-toggle="tab" href="#pcc" role="tab" aria-controls="pcc" aria-selected="false">Get baseline prediction</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" id="model-tab" data-toggle="tab" href="#model" role="tab" aria-controls="model" aria-selected="false">Build model</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" id="references-tab" data-toggle="tab" href="#references" role="tab" aria-controls="references" aria-selected="false">References</a>
+        </li>
+      </ul>
+    </div><!-- End nav tabs-->
+  </nav><!-- End nav -->
+
+  <!-- Tab panes -->
+  <main class="container mb-5" role="main">
+    <div class="tab-content" >
+
+      <div class="tab-pane active" id="about" role="tabpanel" aria-labelledby="about-tab">
+        <div class="card mt-3">
+          <div class="card-header"><h2 class="m-0">What is this project about?</h2></div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <p>To learn how to navigate this site, please check the details on the left side.</p>
+                <p><img class="loc3" src="web/img/burger.png"></p>
+                <p><img class="loc3" src="web/img/fries.png"></p>
+                <p><img class="loc3" src="web/img/drink.png"></p>
+                <p><img class="loc3" src="web/img/spag.png"></p>
+              </div>
+              <div class="col-md-8">
+                <h3>Project background</h3>
+                <p>This project aims to introduce some fundamental steps on how to build machine learning model using logistic regression. It is inspired by another project presented in Machine Learning course that uses classification algorithms to make prediction.</p>
+                <p>The model built in this project aims to predict if we can classify McDonald's menu by nutrional facts.</p><p>The dataset used in this project is taken from Kaggle competition. It contains 22 data columns (features including target) and 260 data points (or entries). For more information, please check the link below.</p>
+                <p><a href="https://www.kaggle.com/mcdonalds/datasets">Nutrition facts from McDonald's menu</a></p>
+
+                <h3>How to navigate this project?</h3>
+                <ul>
+                  <li>Begin with Explore dataset tab. This tab shows how to explore the dataset to be used in the prediction.</li>
+                  <li>Continue with Get baseline prediction tab. This tab shows how to determine the minimum accuracy as baseline of prediction.</li>
+                  <li>End with Build model tab. This tab shows how different parameters affect the accuracy of prediction.</li>
+                </ul>
+                <p>A final tab named References provides you sources and other links to learn more about machine learning using logistic regression.</p>
+                <p>Enjoy! :-)</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">©2019 
+              | A project presented to Data Applications (Web) class under Prof. Eduardo David 
+              | By Lorenzo Sta. Maria & Christian Rick  Soriano
+            | AIM MSDS.</small>
+          </div>
+        </div>
+      </div><!-- End about tab -->
+
+      <div class="tab-pane" id="eda" role="tabpanel" aria-labelledby="eda-tab">
+        <div class="card mt-3">
+          <div class="card-header"><h2 class="m-0">Exploratory Data Analysis (EDA)</h2></div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">Feature</label>
+                  <select class="col-sm-9" id="features_one_dropdown" onchange="plotFeaturesOne()"></select>
+                </div>
+                
+                <p>Exploratory Data Analysis or EDA is an integral step before you proceed in building prediction model.</p>
+                <p>On your left side is a chart that allows you to investigate each variable or feature in the dataset.</p>
+                <p>There are 22 features in the dataset. Features are data columns or characteristics that describe the target. A target is single data column that we want to predict.</p>
+                <p>Navigate on the dropdown opposite to the graph. As you hover on the generated graph, it gives additional details for each feature. Can you identify which feature has the largest values? How about the smallest? Do you think this feature can predict our target?</p>
+              </div>
+              <div class="col-md-8">
+                <div id="features_one_plot"></div>
+              </div>
+            </div><!-- End featuresOne -->
+
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group row">
+                  <label class="col-sm-3 col-form-label">X-axis</label>
+                  <select class="col-sm-9" id="features_two_a_dropdown" onchange="plotFeaturesTwo()"></select><br>
+                  <label class="col-sm-3 col-form-label">Y-axis</label>
+                  <select class="col-sm-9" id="features_two_b_dropdown" onchange="plotFeaturesTwo()"></select>
+                </div>
+                
+                <p>On your left side is another chart but this time, you can explore two features at the time.</p>
+                <p>You choose one feature on x-axis and another feature on y-axis. You can also set whether to visualize using colors for each meal category.</p>
+                <p>One key question that you can ask during EDA is the separation of values using a pair of features. Using the graph, which pair of features do you think shows the most distinct separation?</p>
+                <p>Hold this thought. On the succeeding steps, you will find out if you would be able to predict the target using your selected features.</p>
+              </div>
+              <div class="col-md-8">
+                <div id="features_two_plot"></div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">©2019 
+              | A project presented to Data Applications (Web) class under Prof. Eduardo David 
+              | By Lorenzo Sta. Maria & Christian Rick  Soriano
+            | AIM MSDS.</small>
+          </div>
+        </div>
+      </div><!-- End EDA tab -->
+
+      <div class="tab-pane" id="pcc" role="tabpanel" aria-labelledby="pcc-tab">
+        <div class="card mt-3">
+          <div class="card-header"><h2 class="m-0">Proportional Chance Criterion (PCC)</h2></div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+               <p>Hover your pointer for each meal category on the graph. Click on each bar and check the correct value for each meal category.</p>
+               <div class="form-group row">
+                <label class="col-sm-6 col-form-label">Beef & Pork</label>
+                <input class="col-sm-6" type="text" id="target_cat0"><br>
+                <label class="col-sm-6 col-form-label">Beverages</label>
+                <input class="col-sm-6" type="text" id="target_cat1"><br>
+                <label class="col-sm-6 col-form-label">Breakfast</label>
+                <input class="col-sm-6" type="text" id="target_cat2"><br>
+                <label class="col-sm-6 col-form-label">Chicken & Fish</label>
+                <input class="col-sm-6" type="text" id="target_cat3"><br>
+                <label class="col-sm-6 col-form-label">Coffee & Tea</label>
+                <input class="col-sm-6" type="text" id="target_cat4"><br>
+                <label class="col-sm-6 col-form-label">Desserts</label>
+                <input class="col-sm-6" type="text" id="target_cat5"><br>
+                <label class="col-sm-6 col-form-label">Salads</label>
+                <input class="col-sm-6" type="text" id="target_cat6"><br>
+                <label class="col-sm-6 col-form-label">Smoothies & Shakes</label>
+                <input class="col-sm-6" type="text" id="target_cat7"><br>
+                <label class="col-sm-6 col-form-label">Snacks & Sides</label>
+                <input class="col-sm-6" type="text" id="target_cat8"><br>
+                <button class="col-sm-6 mt-2" onclick="computePCC()">Compute PCC (%)</button><br>
+                <div class="col-sm-6 mt-2 text-danger" id="target_pcc_text"></div>
+                <button class="col-sm-6 mt-2" onclick="resetPCC()">Reset</button>
+              </div>
+              <p>What did just happened?</p>
+              <p>You are in fact getting the values to compute PCC.</p>
+              <p>Proportional Chance Criterion or PCC determines the minimum accuracy that a classifier should attain. A classifier is a prediction model that you want to build to identify the meal category using nutritional facts.</p>
+              <p>It is important to note that the prediction model should attain a desirable accuracy higher than PCC. There is no standards for the minimum but achieving at least 80% accuracy is acceptable.</p>
+              <p>So how do you compute PCC? The formula goes like this.</p>
+              <p><img class="loc2" src="web/img/pcc.png"></p>
+              <p>where the small n refers to count of each meal category and the big N is the total count.</p>
+            </div>
+            <div class="col-md-8">
+              <div id="target_plot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">©2019 
+            | A project presented to Data Applications (Web) class under Prof. Eduardo David 
+            | By Lorenzo Sta. Maria & Christian Rick  Soriano
+          | AIM MSDS.</small>
+        </div>
+      </div>
+    </div><!-- End PCC tab -->
+
+    <div class="tab-pane" id="model" role="tabpanel" aria-labelledby="model-tab">
+      <div class="card mt-3">
+        <div class="card-header"><h2 class="m-0">Logistic Regression</h2></div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <!-- build_model(itera, size, norm, random, param_c) -->
+              <div class="form-group row">
+                <label class="col-sm-8 col-form-label">Number of iteration</label>
+                <select class="col-sm-4" id="engine_itera_dropdown" onchange="plotEngineAccuracy()"></select><br>
+                <label class="col-sm-8 col-form-label">Size</label>
+                <select class="col-sm-4" id="engine_size_dropdown" onchange="plotEngineAccuracy()"></select><br>
+                <label class="col-sm-8 col-form-label">Norm</label>
+                <select class="col-sm-4" id="engine_norm_dropdown" onchange="plotEngineAccuracy()"></select><br>
+                <label class="col-sm-8 col-form-label">Random?</label>
+                <select class="col-sm-4" id="engine_random_dropdown" onchange="plotEngineAccuracy()"></select><br>
+                <label class="col-sm-8 col-form-label">Maximum C to iterate</label>
+                <select class="col-sm-4" id="engine_paramc_dropdown" onchange="plotEngineAccuracy()"></select><br>
+                <!-- <button id="engine_run_button" onclick="plotEngineAccuracy()">Run</button> -->
+              </div>
+              <p>In logistic regression, the prediction is calibrated by assuming that the its state can be separated by two states such 0 for fail and 1 for success (Monterola, 2018). Using a logistic or a sigmoid function below, we can build a prediction model.<br>
+                <img class="loc" src="web/img/logistic2.png"><br>where<br>
+                <img class="loc" src="web/img/yhat.png"><br>
+                This directly results by defining the logarithms of the odds function given by<br>
+                <img class="loc" src="web/img/logitcomplete.png">
+              </p>
+              <p>The mathematical basis of logistic regression can be a bit daunting for beginners. Do not worry, what it is only trying to tell you is that the model will try its best to reach a prediction much closer to the target. In this case, it tries its best to classify meal category using nutritional facts.</p>
+              <p>Play around with controls and investigate how different combinations of parameters increase or decrease prediction accuracy. Can you figure out which combinations yield the highest accuracy?</p>
+              <p>Another important parameter used in logistic regression is the strength of regularization called C. You can check this value on the topmost portion of the graph. Generally, a smaller C value indicates a simpler model. Can you tell by now if we have a simple model?</p>
+              <p>Also, notice that you generate two graphs when you build a model. The first graph shows accuracy of training and test. The second graph shows top predictors used in prediction. Were you able to guess correctly which nutritional facts best predict McDonald's meal category?</p>
+            </div>
+            <div class="col-md-8">
+              <p class="m-0 text-center" id="engine_accuracy_desc0"></p>
+              <p class="m-0 text-center" id="engine_accuracy_desc1"></p>
+              <p class="m-0 text-center" id="engine_accuracy_desc2"></p>
+              <p class="m-0 text-center" id="engine_accuracy_desc3"></p>
+              <p class="m-0 text-center" id="engine_accuracy_desc4"></p>
+              <p class="m-0 text-center" id="engine_accuracy_desc5"></p>
+              <div class="affix" id="engine_accuracy_plot"></div>
+              <div class="affix" id="engine_predictors_plot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">©2019 
+            | A project presented to Data Applications (Web) class under Prof. Eduardo David 
+            | By Lorenzo Sta. Maria & Christian Rick  Soriano
+          | AIM MSDS.</small>
+        </div>
+      </div>
+    </div><!-- End model tab -->
+
+
+    <div class="tab-pane" id="references" role="tabpanel" aria-labelledby="references-tab">
+      <div class="card mt-3">
+        <div class="card-header"><h2 class="m-0">Where to go next?</h2></div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <p>This project is made entirely using <a href="http://flask.pocoo.org/">Flask Python</a>, <a href="https://getbootstrap.com/">Booststrap CSS</a>, and <a href="https://plot.ly/javascript/">Plotly Javascript</a>. Dev tools such as <a href="https://www.sublimetext.com/">Sublime</a> helped in building this site.</p>
+              <p>Huge thanks to Prof. Eduardo David for the startup code and Prof. Chris Monterola for the logistic regression lecture.</p>
+            </div>
+            <div class="col-md-8">
+              <p>You can check the links below to learn more about machine learning and logistic regression.</p>
+              <ul>
+                <li><a href="https://machinelearningmastery.com/logistic-regression-for-machine-learning/">Machine Learning Mastery</a></li>
+                <li><a href="https://hackernoon.com/introduction-to-machine-learning-algorithms-logistic-regression-cbdd82d81a36">Hackernoon</a></li>
+                <li><a href="https://www.quora.com/What-exactly-is-a-logistic-regression-algorithm-in-machine-learning-What-are-its-applications">Quora</a></li>
+              </ul>
+              <p>We are not code experts but we would be glad to receive your comments about our work. You can us reach me through our email below.</p>
+              <ul>
+                <li><a href="mailto:lstamaria@aim.edu">lstamaria@aim.edu</a></li>
+                <li><a href="mailto:csoriano@aim.edu">csoriano@aim.edu</a></li>
+              </ul>      
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">©2019 
+            | A project presented to Data Applications (Web) class under Prof. Eduardo David 
+            | By Lorenzo Sta. Maria & Christian Rick  Soriano
+          | AIM MSDS.</small>
+        </div>
+      </div>
+
+
+
+    </div><!-- End references tab -->
+  </div>
+</div>
+</main>
+  
+  <!-- Load Internal JS scripts -->
+  <script>
+    $('#myTab a').on('click', function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+  </script>
+
+  <!-- Load Plotly JS Scripts -->
+  <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script src="web/js/plotly-latest.min.js"></script>
+  <script src="web/js/main.js"></script>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  </body>
+</html>
